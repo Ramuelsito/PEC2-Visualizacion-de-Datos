@@ -1,3 +1,526 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Ficha teórica de la técnica de visualización Streamgraph"><title>Streamgraph · PEC2 Visualización de Datos</title><style>
-:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#24344b;background:#f5f7fa}*{box-sizing:border-box}body{margin:0}header{background:#173659;color:white;padding:25px max(24px,calc((100vw - 1000px)/2))}header small{letter-spacing:.12em;text-transform:uppercase;color:#c8d9ef}main{max-width:1000px;margin:36px auto 80px;padding:0 24px}h1{font-size:clamp(27px,4vw,40px);line-height:1.16;margin:10px 0 15px}h2{font-size:20px;margin:0 0 13px;color:#163e64}h3{font-size:16px;color:#173659;margin:20px 0 7px}p,li{line-height:1.7}p{margin:9px 0 13px}a{color:#1669a9;text-underline-offset:3px}.lead{font-size:18px;max-width:770px;color:#50627a}.panel{background:white;border:1px solid #dfe6ef;border-radius:12px;padding:24px;margin:22px 0;box-shadow:0 2px 10px #132c4510}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}.tag{display:inline-block;background:#e9f1f9;padding:5px 10px;border-radius:30px;color:#15507c;font-size:12px;font-weight:650}.btn{display:inline-block;background:#174a75;color:white;padding:12px 17px;border-radius:8px;text-decoration:none;font-weight:650;margin:10px 8px 0 0}.btn.secondary{background:#e5edf6;color:#174a75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #e3eaf2;text-align:left;padding:11px;vertical-align:top}th{color:#48627b}ul{padding-left:21px}.small{font-size:13px;color:#586b80}.refs li{overflow-wrap:anywhere;margin-bottom:8px}footer{text-align:center;padding:25px;color:#67788d;font-size:13px}@media(max-width:680px){.twocol{grid-template-columns:1fr}.panel{padding:18px}header{padding:20px 24px}}
-</style></head><body><header><small>UOC · PEC2 · Visualización de Datos</small><div style="margin-top:9px"><a style="color:white" href="../">Inicio</a> · <a style="color:white" href="./">Visualización</a> · <strong>Teoría</strong></div></header><main><span class="tag">Ficha de técnica · Grupo II</span><h1>Streamgraph</h1><p class="lead">Cambios de composición en las fuentes de generación eléctrica.</p><a class="btn" href="./">Ver visualización interactiva</a><a class="btn secondary" href="../">Volver al índice</a><section class="panel"><h2>01 · Nombre, origen y autoría</h2><p><strong>Streamgraph</strong> o <em>gráfico de corriente</em>: variante de los gráficos de áreas apiladas que organiza bandas alrededor de una línea base variable. Tiene antecedentes en las áreas apiladas y en <em>ThemeRiver</em>. Lee Byron desarrolló el diseño moderno para historiales de escucha musical y publicó, junto con Martin Wattenberg, el estudio <em>Stacked Graphs—Geometry &amp; Aesthetics</em> (2008), en el que se analizan su geometría y sus decisiones estéticas.</p></section><section class="panel"><h2>02 · Clasificación, función y codificación</h2><p><strong>Tipo:</strong> series temporales multivariantes y composición de un conjunto. La posición horizontal indica el tiempo; las bandas constituyen marcas de área; <strong>su grosor</strong> codifica la cantidad correspondiente a cada categoría. Los colores distinguen las categorías. A diferencia de un área apilada convencional, la línea base no es necesariamente cero y puede desplazarse para suavizar la forma general.</p><p><strong>Objetivo:</strong> identificar qué categorías se expanden o contraen y cómo cambia su protagonismo en un conjunto a lo largo del tiempo.</p></section><section class="panel"><h2>03 · Estructura y tipos de datos</h2><p>Requiere una dimensión temporal ordenada, una categoría y una medida numérica <strong>no negativa</strong> para cada combinación. Puede utilizarse una tabla larga (<em>año, categoría, valor</em>) o una tabla ancha (años por filas y categorías por columnas). Para que la forma tenga sentido, las series deben usar unidades y periodos comparables.</p><table><tr><th>Año</th><th>Fuente</th><th>Producción (TWh)</th></tr><tr><td>2000</td><td>Carbón</td><td>Valor numérico</td></tr><tr><td>2000</td><td>Nuclear</td><td>Valor numérico</td></tr></table></section><section class="panel"><h2>04 · Ventajas e inconvenientes</h2><div class="twocol"><div><h3>Ventajas</h3><ul><li>Hace visible la evolución conjunta de muchas categorías.</li><li>Destaca periodos de expansión, retroceso y cambios de protagonismo.</li><li>Ofrece una representación compacta y atractiva de series temporales.</li></ul></div><div><h3>Limitaciones</h3><ul><li>Las bandas no comparten una línea base fija: comparar valores exactos resulta difícil.</li><li>La posición y el orden de las capas influyen en la percepción.</li><li>Un exceso de categorías o colores dificulta seguir cada serie.</li></ul></div></div></section><section class="panel"><h2>05 · Tamaño de datos y aplicaciones</h2><p><strong>Escala práctica:</strong> no existe un límite formal único. El gráfico gana interés cuando hay suficientes periodos para observar evolución y varias categorías con cambios apreciables. Un número muy elevado de bandas puede impedir identificarlas, por lo que conviene seleccionar, agrupar o añadir interacción.</p><p><strong>Usos habituales:</strong> evolución de escuchas por artista o género, recaudación de películas, temas en noticias, generación energética y actividad por categorías.</p><p><strong>Audiencia de esta aplicación:</strong> estudiantes y público interesado en la transformación de la generación eléctrica española.</p></section><section class="panel"><h2>06 · Aplicación desarrollada</h2><p><strong>Pregunta:</strong> ¿De qué fuentes procede la electricidad que generamos en España y cómo han evolucionado?</p><p>Se utilizan datos anuales de <strong>generación eléctrica en España entre 2000 y 2025</strong> provenientes de Our World in Data: carbón, gas natural, nuclear, hidráulica, eólica, solar, petróleo y otras renovables. La medida es la energía eléctrica generada, en <strong>TWh</strong>, no todo el consumo energético del país.</p><p>Las bandas se ordenan por generación media durante el periodo y su grosor refleja la producción. La leyenda y la interacción permiten identificar fuentes y consultar valores. La lectura principal es el cambio de composición, especialmente los contrastes entre fuentes tradicionales y renovables; para cifras precisas sería preferible una tabla o gráficos de líneas.</p><p class="small">Datos: <a href="https://catalog.ourworldindata.org/energy/owid_energy/">Our World in Data · Energy Dataset</a>.</p></section><section class="panel"><h2>07 · Referencias</h2><ol class="refs"><li>Byron, L., &amp; Wattenberg, M. (2008). <em>Stacked Graphs—Geometry &amp; Aesthetics</em>. <em>IEEE Transactions on Visualization and Computer Graphics, 14</em>(6), 1245–1252. <a href="https://doi.org/10.1109/TVCG.2008.166">DOI</a>. <a href="https://leebyron.com/streamgraph/">Página de los autores</a>.</li><li>Our World in Data. <em>Energy Dataset</em>. <a href="https://catalog.ourworldindata.org/energy/owid_energy/">Catálogo y documentación</a>.</li><li>From Data to Viz. <em>Streamgraph</em>. <a href="https://www.data-to-viz.com/graph/streamgraph.html">Guía de técnica</a>.</li></ol></section></main><footer>PEC2 · Visualización de Datos · Elaboración propia</footer></body></html>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Ficha teórica de la técnica de visualización Streamgraph"
+    >
+
+    <title>Streamgraph · PEC2 Visualización de Datos</title>
+
+    <style>
+        :root {
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            color: #24344b;
+            background: #f5f7fa;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            background: #173659;
+            color: white;
+            padding: 25px max(24px, calc((100vw - 1000px) / 2));
+        }
+
+        header small {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #c8d9ef;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 36px auto 80px;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-size: clamp(27px, 4vw, 40px);
+            line-height: 1.16;
+            margin: 10px 0 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 0 0 13px;
+            color: #163e64;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #173659;
+            margin: 20px 0 7px;
+        }
+
+        p,
+        li {
+            line-height: 1.7;
+        }
+
+        p {
+            margin: 9px 0 13px;
+        }
+
+        a {
+            color: #1669a9;
+            text-underline-offset: 3px;
+        }
+
+        .lead {
+            font-size: 18px;
+            max-width: 770px;
+            color: #50627a;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #dfe6ef;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 22px 0;
+            box-shadow: 0 2px 10px #132c4510;
+        }
+
+        .twocol {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e9f1f9;
+            padding: 5px 10px;
+            border-radius: 30px;
+            color: #15507c;
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #174a75;
+            color: white;
+            padding: 12px 17px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 650;
+            margin: 10px 8px 0 0;
+        }
+
+        .btn.secondary {
+            background: #e5edf6;
+            color: #174a75;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        td,
+        th {
+            border-bottom: 1px solid #e3eaf2;
+            text-align: left;
+            padding: 11px;
+            vertical-align: top;
+        }
+
+        th {
+            color: #48627b;
+        }
+
+        ul {
+            padding-left: 21px;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #586b80;
+        }
+
+        .refs li {
+            overflow-wrap: anywhere;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #67788d;
+            font-size: 13px;
+        }
+
+        @media (max-width: 680px) {
+            .twocol {
+                grid-template-columns: 1fr;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            header {
+                padding: 20px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <small>UOC · PEC2 · Visualización de Datos</small>
+
+        <div style="margin-top: 9px">
+            <a style="color: white" href="../">Inicio</a> ·
+            <a style="color: white" href="./">Visualización</a> ·
+            <strong>Teoría</strong>
+        </div>
+    </header>
+
+    <main>
+        <span class="tag">Ficha de técnica · Grupo II</span>
+
+        <h1>Streamgraph</h1>
+
+        <p class="lead">
+            Cambios de composición en las fuentes de generación eléctrica.
+        </p>
+
+        <a class="btn" href="./">
+            Ver visualización interactiva
+        </a>
+
+        <a class="btn secondary" href="../">
+            Volver al índice
+        </a>
+
+        <!-- 01. Nombre, origen y autoría -->
+        <section class="panel">
+            <h2>01 · Nombre, origen y autoría</h2>
+
+            <p>
+                <strong>Streamgraph</strong>:
+                variante de los gráficos de áreas apiladas que organiza
+                bandas alrededor de una línea base variable.
+
+                Tiene antecedentes en las áreas apiladas y en
+                <em>ThemeRiver</em>.
+
+                Lee Byron desarrolló el diseño moderno para historiales
+                de escucha musical y publicó, junto con Martin Wattenberg,
+                el estudio <em>Stacked Graphs—Geometry &amp; Aesthetics</em>
+                (2008), en el que se analizan su geometría y sus
+                decisiones estéticas.
+            </p>
+        </section>
+
+        <!-- 02. Clasificación, función y codificación -->
+        <section class="panel">
+            <h2>02 · Clasificación, función y codificación</h2>
+
+            <p>
+                <strong>Tipo:</strong> series temporales multivariantes
+                y composición de un conjunto.
+
+                La posición horizontal indica el tiempo; las bandas
+                constituyen marcas de área; <strong>su grosor</strong>
+                codifica la magnitud que encontramos de esa categoría.
+
+                Los colores distinguen las categorías.
+
+                A diferencia de un área apilada convencional,
+                la línea base no es necesariamente cero y puede
+                desplazarse para suavizar la forma general.
+            </p>
+
+            <p>
+                <strong>Objetivo:</strong> identificar qué categorías
+                se expanden o contraen y cómo cambia su protagonismo
+                en un conjunto a lo largo del tiempo.
+            </p>
+        </section>
+
+        <!-- 03. Estructura y tipos de datos -->
+        <section class="panel">
+            <h2>03 · Estructura y tipos de datos</h2>
+
+            <p>
+                Requiere una dimensión temporal ordenada,
+                una categoría y una medida numérica
+                <strong>no negativa</strong> para cada combinación.
+
+                Puede utilizarse una tabla larga
+                (<em>año, categoría, valor</em>)
+                o una tabla ancha (años por filas y categorías por columnas).
+
+                Para que la forma tenga sentido, las series deben usar
+                unidades y periodos que se puedan comparar entre sí.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Año</th>
+                        <th>Fuente</th>
+                        <th>Producción (TWh)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>2000</td>
+                        <td>Carbón</td>
+                        <td>Valor numérico</td>
+                    </tr>
+
+                    <tr>
+                        <td>2000</td>
+                        <td>Nuclear</td>
+                        <td>Valor numérico</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 04. Ventajas e inconvenientes -->
+        <section class="panel">
+            <h2>04 · Ventajas e inconvenientes</h2>
+
+            <div class="twocol">
+                <div>
+                    <h3>Ventajas</h3>
+
+                    <ul>
+                        <li>
+                            Hace visible la evolución conjunta
+                            de muchas categorías.
+                        </li>
+
+                        <li>
+                            Destaca periodos de expansión,
+                            retroceso y cambios de liderazgo 
+                            entre categorías.
+                        </li>
+
+                        <li>
+                            Ofrece una representación compacta
+                            y atractiva de series temporales.
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Limitaciones</h3>
+
+                    <ul>
+                        <li>
+                            Las bandas no comparten una línea base fija:
+                            comparar valores exactos resulta difícil.
+                        </li>
+
+                        <li>
+                            La posición y el orden de las capas
+                            influyen en la percepción.
+                        </li>
+
+                        <li>
+                            Un exceso de categorías o colores
+                            dificulta seguir cada serie.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Tamaño de datos y aplicaciones -->
+        <section class="panel">
+            <h2>05 · Tamaño de datos y aplicaciones</h2>
+
+            <p>
+                <strong>Escala práctica:</strong> no existe
+                un límite formal único.
+
+                El gráfico gana interés cuando hay suficientes
+                periodos para observar evolución y varias categorías
+                con cambios apreciables.
+
+                Un número muy elevado de bandas puede impedir
+                identificarlas, por lo que conviene seleccionar,
+                agrupar o añadir interactividad.
+            </p>
+
+            <p>
+                <strong>Usos habituales:</strong> evolución de escuchas
+                por artista o género, recaudación de películas,
+                generación energética y actividad por categorías.
+            </p>
+
+            <p>
+                <strong>Audiencia de esta aplicación:</strong>
+                estudiantes y público interesado en la transformación
+                de la generación eléctrica española.
+            </p>
+        </section>
+
+        <!-- 06. Visualización desarrollada -->
+        <section class="panel">
+            <h2>06 · Visualización desarrollada</h2>
+
+            <p>
+                <strong>Pregunta:</strong>
+                ¿De qué fuentes procede la electricidad
+                que generamos en España y cómo han evolucionado?
+            </p>
+
+            <p>
+                Se utilizan datos anuales de
+                <strong>
+                    generación eléctrica en España entre 2000 y 2025
+                </strong>
+                provenientes de Our World in Data: carbón, gas natural,
+                nuclear, hidráulica, eólica, solar, petróleo
+                y otras renovables.
+
+                La medida es la energía eléctrica generada,
+                en <strong>TWh</strong>, no todo el consumo energético
+                del país.
+            </p>
+
+            <p>
+                Las bandas se ordenan por generación media durante
+                el periodo y su grosor refleja la producción.
+
+                La leyenda y la interacción permiten identificar
+                fuentes y consultar valores.
+
+                La lectura principal es el cambio de composición,
+                especialmente los contrastes entre fuentes tradicionales
+                y renovables; para cifras precisas sería preferible
+                una tabla o gráficos de líneas.
+            </p>
+
+            <p class="small">
+                Datos:
+
+                <a
+                    href="https://catalog.ourworldindata.org/energy/owid_energy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Our World in Data · Energy Dataset
+                </a>.
+            </p>
+        </section>
+
+        <!-- 07. Referencias -->
+        <section class="panel">
+            <h2>07 · Referencias</h2>
+
+            <ol class="refs">
+                <li>
+                    Byron, L., &amp; Wattenberg, M. (2008).
+
+                    <em>Stacked Graphs—Geometry &amp; Aesthetics</em>.
+
+                    <em>
+                        IEEE Transactions on Visualization
+                        and Computer Graphics, 14
+                    </em>(6), 1245–1252.
+
+                    <a
+                        href="https://doi.org/10.1109/TVCG.2008.166"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        DOI
+                    </a>.
+
+                    <a
+                        href="https://leebyron.com/streamgraph/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Página de los autores
+                    </a>.
+                </li>
+
+                <li>
+                    Our World in Data.
+
+                    <em>Energy Dataset</em>.
+
+                    <a
+                        href="https://catalog.ourworldindata.org/energy/owid_energy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Catálogo y documentación
+                    </a>.
+                </li>
+
+                <li>
+                    From Data to Viz.
+
+                    <em>Streamgraph</em>.
+
+                    <a
+                        href="https://www.data-to-viz.com/graph/streamgraph.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Guía de técnica
+                    </a>.
+                </li>
+
+                <li>
+                    Wikipedia. (s. f.).
+                    <em>Streamgraph</em>.
+                    <a href="https://en.wikipedia.org/wiki/Streamgraph"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Consultar artículo
+                    </a>.
+                </li>
+                
+                <li>
+                    From Data to Viz. (s. f.).
+                    <em>Streamgraph</em>.
+                    <a href="https://www.data-to-viz.com/graph/streamgraph.html"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Guía de visualización
+                    </a>.
+                </li>
+                
+                <li>
+                    Data Viz Project. (s. f.).
+                    <em>Stream Graph</em>.
+                    <a href="https://datavizproject.com/data-type/stream-graph/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Ficha de la técnica
+                    </a>.
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        PEC2 · Visualización de Datos · Elaboración propia
+    </footer>
+</body>
+</html>

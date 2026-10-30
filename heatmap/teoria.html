@@ -1,3 +1,531 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Ficha teórica de la técnica de visualización Heatmap"><title>Heatmap · PEC2 Visualización de Datos</title><style>
-:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#24344b;background:#f5f7fa}*{box-sizing:border-box}body{margin:0}header{background:#173659;color:white;padding:25px max(24px,calc((100vw - 1000px)/2))}header small{letter-spacing:.12em;text-transform:uppercase;color:#c8d9ef}main{max-width:1000px;margin:36px auto 80px;padding:0 24px}h1{font-size:clamp(27px,4vw,40px);line-height:1.16;margin:10px 0 15px}h2{font-size:20px;margin:0 0 13px;color:#163e64}h3{font-size:16px;color:#173659;margin:20px 0 7px}p,li{line-height:1.7}p{margin:9px 0 13px}a{color:#1669a9;text-underline-offset:3px}.lead{font-size:18px;max-width:770px;color:#50627a}.panel{background:white;border:1px solid #dfe6ef;border-radius:12px;padding:24px;margin:22px 0;box-shadow:0 2px 10px #132c4510}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}.tag{display:inline-block;background:#e9f1f9;padding:5px 10px;border-radius:30px;color:#15507c;font-size:12px;font-weight:650}.btn{display:inline-block;background:#174a75;color:white;padding:12px 17px;border-radius:8px;text-decoration:none;font-weight:650;margin:10px 8px 0 0}.btn.secondary{background:#e5edf6;color:#174a75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #e3eaf2;text-align:left;padding:11px;vertical-align:top}th{color:#48627b}ul{padding-left:21px}.small{font-size:13px;color:#586b80}.refs li{overflow-wrap:anywhere;margin-bottom:8px}footer{text-align:center;padding:25px;color:#67788d;font-size:13px}@media(max-width:680px){.twocol{grid-template-columns:1fr}.panel{padding:18px}header{padding:20px 24px}}
-</style></head><body><header><small>UOC · PEC2 · Visualización de Datos</small><div style="margin-top:9px"><a style="color:white" href="../">Inicio</a> · <a style="color:white" href="./">Visualización</a> · <strong>Teoría</strong></div></header><main><span class="tag">Ficha de técnica · Grupo I</span><h1>Heatmap</h1><p class="lead">Patrones térmicos en una matriz de estaciones y meses.</p><a class="btn" href="./">Ver visualización interactiva</a><a class="btn secondary" href="../">Volver al índice</a><section class="panel"><h2>01 · Nombre, origen y autoría</h2><p><strong>Heatmap</strong> o <em>mapa de calor</em>: representación de valores mediante colores distribuidos en una matriz. No se atribuye a una persona como inventora única. Sus antecedentes se sitúan en la tradición de matrices sombreadas del siglo XIX; se cita el trabajo de Toussaint Loua (1873) como antecedente. Wilkinson y Friendly (2009) documentan específicamente la historia del <em>cluster heat map</em>, que añade una ordenación de filas y columnas basada en agrupamiento.</p><p class="small">No debe confundirse un heatmap convencional con un cluster heatmap: este último incorpora información de agrupamiento, generalmente dendrogramas.</p></section><section class="panel"><h2>02 · Clasificación, función y codificación</h2><p><strong>Tipo:</strong> visualización de datos matriciales para comparación y exploración de patrones. Las posiciones horizontal y vertical identifican categorías o índices ordenados; el <strong>color</strong> codifica una magnitud cuantitativa. La tarea principal es localizar contrastes, agrupaciones, concentraciones y valores atípicos, no leer cada cifra con precisión.</p></section><section class="panel"><h2>03 · Estructura y tipos de datos</h2><p>Requiere dos dimensiones que permitan organizar las celdas y una medida por combinación. En formato largo, por ejemplo:</p><table><tr><th>Estación</th><th>Mes</th><th>Temperatura media (°C)</th></tr><tr><td>Izaña</td><td>Enero</td><td>Valor numérico</td></tr><tr><td>Santa Cruz</td><td>Enero</td><td>Valor numérico</td></tr></table><p>Filas y columnas: variables categóricas, ordinales o índices temporales ordenados. Color: medida numérica continua o discretizada, con escala coherente. Si falta una combinación, debe diferenciarse claramente de un valor igual a cero.</p></section><section class="panel"><h2>04 · Ventajas e inconvenientes</h2><div class="twocol"><div><h3>Ventajas</h3><ul><li>Localiza patrones generales de un vistazo.</li><li>Aprovecha bien el espacio para matrices de muchas celdas.</li><li>Facilita detectar valores extremos y comparar categorías.</li></ul></div><div><h3>Limitaciones</h3><ul><li>Distinguir diferencias pequeñas mediante color es difícil.</li><li>La interpretación depende de la paleta y el rango de la escala.</li><li>Demasiadas celdas o etiquetas dificultan la lectura.</li></ul></div></div></section><section class="panel"><h2>05 · Tamaño de datos y aplicaciones</h2><p><strong>Escala práctica:</strong> no existe mínimo o máximo universal. Unas pocas celdas no suelen justificar la técnica; decenas o centenares pueden leerse bien. Miles requieren zoom, filtrado o agrupación según pantalla y resolución.</p><p><strong>Usos habituales:</strong> matrices de correlaciones, actividad por día y hora, patrones climáticos, expresión genética y ocupación de servicios.</p><p><strong>Audiencia de esta aplicación:</strong> estudiantes y público interesado en climatología de Tenerife; se busca comparar meses y ubicaciones, no analizar tendencias de calentamiento a lo largo de los años.</p></section><section class="panel"><h2>06 · Aplicación desarrollada</h2><p><strong>Pregunta:</strong> ¿Cómo varía la temperatura entre estaciones y meses en Tenerife?</p><p>Se representan las temperaturas medias mensuales de cuatro estaciones de AEMET —Izaña, Tenerife Norte Aeropuerto, Santa Cruz de Tenerife y Tenerife Sur Aeropuerto— a partir de <strong>valores climatológicos normales de 1981–2010</strong>. Son promedios climáticos del periodo, no observaciones individuales de 2010 ni una serie anual de evolución del clima.</p><p>La posición organiza estación y mes; el color indica la temperatura; el cursor permite leer la cifra exacta. La interpretación debe centrarse en la estacionalidad y los contrastes espaciales.</p><p class="small">Datos: <a href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos">AEMET · Valores climatológicos normales</a> · <a href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos/ayuda">Ayuda y definiciones</a>.</p></section><section class="panel"><h2>07 · Referencias</h2><ol class="refs"><li>Wilkinson, L., &amp; Friendly, M. (2009). <em>The History of the Cluster Heat Map</em>. <em>The American Statistician, 63</em>(2), 179–184. <a href="https://doi.org/10.1198/tas.2009.0033">DOI</a>.</li><li>AEMET. <em>Valores climatológicos normales (1981–2010)</em>. <a href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos">Fuente</a>.</li><li>From Data to Viz. <em>Heatmap</em>. <a href="https://www.data-to-viz.com/graph/heatmap.html">Guía de técnica</a>.</li></ol></section></main><footer>PEC2 · Visualización de Datos · Elaboración propia</footer></body></html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Ficha teórica de la técnica de visualización Heatmap"
+    >
+
+    <title>Heatmap · PEC2 Visualización de Datos</title>
+
+    <style>
+        :root {
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            color: #24344b;
+            background: #f5f7fa;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        header {
+            background: #173659;
+            color: white;
+            padding: 25px max(24px, calc((100vw - 1000px) / 2));
+        }
+
+        header small {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #c8d9ef;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 36px auto 80px;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-size: clamp(27px, 4vw, 40px);
+            line-height: 1.16;
+            margin: 10px 0 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 0 0 13px;
+            color: #163e64;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #173659;
+            margin: 20px 0 7px;
+        }
+
+        p,
+        li {
+            line-height: 1.7;
+        }
+
+        p {
+            margin: 9px 0 13px;
+        }
+
+        a {
+            color: #1669a9;
+            text-underline-offset: 3px;
+        }
+
+        .lead {
+            font-size: 18px;
+            max-width: 770px;
+            color: #50627a;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #dfe6ef;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 22px 0;
+            box-shadow: 0 2px 10px #132c4510;
+        }
+
+        .twocol {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e9f1f9;
+            padding: 5px 10px;
+            border-radius: 30px;
+            color: #15507c;
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #174a75;
+            color: white;
+            padding: 12px 17px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 650;
+            margin: 10px 8px 0 0;
+        }
+
+        .btn.secondary {
+            background: #e5edf6;
+            color: #174a75;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        td,
+        th {
+            border-bottom: 1px solid #e3eaf2;
+            text-align: left;
+            padding: 11px;
+            vertical-align: top;
+        }
+
+        th {
+            color: #48627b;
+        }
+
+        ul {
+            padding-left: 21px;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #586b80;
+        }
+
+        .refs li {
+            overflow-wrap: anywhere;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #67788d;
+            font-size: 13px;
+        }
+
+        @media (max-width: 680px) {
+            .twocol {
+                grid-template-columns: 1fr;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            header {
+                padding: 20px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <small>UOC · PEC2 · Visualización de Datos</small>
+
+        <div style="margin-top: 9px">
+            <a style="color: white" href="../">Inicio</a> ·
+            <a style="color: white" href="./">Visualización</a> ·
+            <strong>Teoría</strong>
+        </div>
+    </header>
+
+    <main>
+        <span class="tag">Ficha de técnica · Grupo I</span>
+
+        <h1>Heatmap</h1>
+
+        <p class="lead">
+            Patrones térmicos en una matriz de estaciones y meses.
+        </p>
+
+        <a class="btn" href="./">
+            Ver visualización interactiva
+        </a>
+
+        <a class="btn secondary" href="../">
+            Volver al índice
+        </a>
+
+        <!-- 01. Nombre, origen y autoría -->
+        <section class="panel">
+            <h2>01 · Nombre, origen y autoría</h2>
+
+            <p>
+                <strong>Heatmap</strong>:
+                representación de valores mediante colores distribuidos
+                en una matriz.
+
+                No existe un único inventor. Sus antecedentes se 
+                sitúan en la tradición de matrices sombreadas del siglo XIX; 
+                se cita como antecedente el trabajo de Toussaint Loua (1873),
+                un estudio sobre estadísticas sociales en los distritos de París.
+
+                Wilkinson y Friendly (2009) documentan específicamente
+                la historia del <em>cluster heat map</em>, que añade
+                una ordenación de filas y columnas basada en agrupamiento.
+            </p>
+
+            <p class="small">
+                No debe confundirse un heatmap convencional con un
+                cluster heatmap: este último incorpora información
+                de agrupamiento, dendrogramas en el eje horizontal y vertical.
+            </p>
+        </section>
+
+        <!-- 02. Clasificación, función y codificación -->
+        <section class="panel">
+            <h2>02 · Clasificación, función y codificación</h2>
+
+            <p>
+                <strong>Tipo:</strong> visualización de datos matriciales
+                para comparación y exploración de patrones.
+
+                Las posiciones horizontal y vertical identifican
+                categorías o índices ordenados; el <strong>color</strong>
+                codifica una magnitud cuantitativa.
+
+                La tarea principal es localizar contrastes,
+                agrupaciones, concentraciones y valores atípicos,
+                no leer cada cifra con precisión. Aunque existen
+                mapas de calor con el coeficiente que presenta cada 
+                celda, como cuando representamos los coeficientes de 
+                las matrices de correlación.
+            </p>
+        </section>
+
+        <!-- 03. Estructura y tipos de datos -->
+        <section class="panel">
+            <h2>03 · Estructura y tipos de datos</h2>
+
+            <p>
+                Requiere dos dimensiones que permitan organizar
+                las celdas y una medida por combinación.
+
+                En formato largo, por ejemplo:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estación</th>
+                        <th>Mes</th>
+                        <th>Temperatura media (°C)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Izaña</td>
+                        <td>Enero</td>
+                        <td>Valor numérico</td>
+                    </tr>
+
+                    <tr>
+                        <td>Santa Cruz</td>
+                        <td>Enero</td>
+                        <td>Valor numérico</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Filas y columnas: variables categóricas, ordinales
+                o índices temporales ordenados.
+
+                Color: medida numérica continua o discretizada,
+                con escala coherente.
+
+                Si falta una combinación, debe diferenciarse
+                claramente de un valor igual a cero.
+            </p>
+        </section>
+
+        <!-- 04. Ventajas e inconvenientes -->
+        <section class="panel">
+            <h2>04 · Ventajas e inconvenientes</h2>
+
+            <div class="twocol">
+                <div>
+                    <h3>Ventajas</h3>
+
+                    <ul>
+                        <li>
+                            Localiza patrones generales de un vistazo.
+                        </li>
+
+                        <li>
+                            Aprovecha bien el espacio para matrices
+                            de muchas celdas.
+                        </li>
+
+                        <li>
+                            Facilita detectar valores extremos
+                            y comparar categorías.
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Limitaciones</h3>
+
+                    <ul>
+                        <li>
+                            Distinguir diferencias pequeñas mediante
+                            color es difícil.
+                        </li>
+
+                        <li>
+                            La interpretación depende de la paleta
+                            y el rango de la escala.
+                        </li>
+
+                        <li>
+                            Demasiadas celdas o etiquetas dificultan
+                            la lectura.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Tamaño de datos y aplicaciones -->
+        <section class="panel">
+            <h2>05 · Tamaño de datos y aplicaciones</h2>
+
+            <p>
+                <strong>Escala práctica:</strong> no existe mínimo
+                o máximo universal.
+
+                Unas pocas celdas no suelen justificar la técnica;
+                decenas o centenares pueden leerse bien.
+
+                Miles requieren zoom, filtrado o agrupación
+                según pantalla y resolución.
+            </p>
+
+            <p>
+                <strong>Usos habituales:</strong> matrices de
+                correlaciones, actividad por día y hora,
+                patrones climáticos, expresión genética
+                y ocupación de servicios.
+            </p>
+
+            <p>
+                <strong>Audiencia de esta aplicación:</strong>
+                estudiantes y público interesado en climatología
+                de Tenerife.
+
+                Se busca comparar meses y ubicaciones,
+                no analizar tendencias de calentamiento
+                a lo largo de los años.
+            </p>
+        </section>
+
+        <!-- 06. Visualización desarrollada -->
+        <section class="panel">
+            <h2>06 · Visualización desarrollada</h2>
+
+            <p>
+                <strong>Pregunta:</strong>
+                ¿Cómo varía la temperatura entre estaciones
+                y meses en Tenerife?
+            </p>
+
+            <p>
+                Se representan las temperaturas medias mensuales
+                de cuatro estaciones de AEMET —Izaña,
+                Tenerife Norte Aeropuerto, Santa Cruz de Tenerife
+                y Tenerife Sur Aeropuerto— a partir de
+                <strong>
+                    valores climatológicos normales de 1981–2010
+                </strong>.
+
+                Son promedios climáticos del periodo,
+                no observaciones individuales de 2010
+                ni una serie anual de evolución del clima.
+            </p>
+
+            <p>
+                La posición organiza estación y mes;
+                el color indica la temperatura;
+                el cursor permite leer la cifra exacta.
+
+                La interpretación debe centrarse en la
+                estacionalidad y los contrastes espaciales.
+            </p>
+
+            <p class="small">
+                Datos:
+
+                <a
+                    href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    AEMET · Valores climatológicos normales
+                </a>
+
+                ·
+
+                <a
+                    href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos/ayuda"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ayuda y definiciones
+                </a>.
+            </p>
+        </section>
+
+        <!-- 07. Referencias -->
+        <section class="panel">
+            <h2>07 · Referencias</h2>
+
+            <ol class="refs">
+                <li>
+                    Wilkinson, L., &amp; Friendly, M. (2009).
+
+                    <em>The History of the Cluster Heat Map</em>.
+
+                    <em>The American Statistician, 63</em>(2),
+                    179–184.
+
+                    <a
+                        href="https://doi.org/10.1198/tas.2009.0033"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        DOI
+                    </a>.
+                </li>
+
+                <li>
+                    AEMET.
+
+                    <em>
+                        Valores climatológicos normales (1981–2010)
+                    </em>.
+
+                    <a
+                        href="https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/valoresclimatologicos"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Fuente
+                    </a>.
+                </li>
+
+                <li>
+                    From Data to Viz.
+
+                    <em>Heatmap</em>.
+
+                    <a
+                        href="https://www.data-to-viz.com/graph/heatmap.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Guía de técnica
+                    </a>.
+                </li>
+
+                <li>
+                    Wikipedia. (s. f.).
+                    <em>Mapa de calor</em>.
+                    <a href="https://es.wikipedia.org/wiki/Mapa_de_calor"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        Consultar artículo
+                    </a>.
+                </li>
+
+                <li>
+                    From Data to Viz. (s. f.).
+                    <em>Heatmap</em>.
+                    <a href="https://www.data-to-viz.com/graph/heatmap.html"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        Guía de visualización
+                    </a>.
+                </li>
+
+                <li>
+                    Data Viz Project. (s. f.).
+                    <em>Heat Map</em>.
+                    <a href="https://datavizproject.com/data-type/heat-map/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        Ficha de la técnica
+                    </a>.
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        PEC2 · Visualización de Datos · Elaboración propia
+    </footer>
+</body>
+
+</html>
